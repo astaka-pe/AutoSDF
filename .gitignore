@@ -1,0 +1,10 @@
+preprocess/isosurface/LIB_PATH
+preprocess/isosurface/tbb/
+results
+saved_ckpt
+demo_data
+__pycache__
+
+*.obj
+*.h5
+*.pth

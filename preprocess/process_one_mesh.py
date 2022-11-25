@@ -196,7 +196,6 @@ def get_normalize_mesh(model_file, norm_mesh_sub_dir):
 
 
 def create_one_sdf(sdfcommand, sdf_res, expand_rate, sdf_file, obj_file, indx, g=0.0):
-
     # command_str = ". " + sdfcommand + " " + obj_file + " " + str(sdf_res) + " " + str(sdf_res) + \
     command_str = sdfcommand + " " + obj_file + " " + str(sdf_res) + " " + str(sdf_res) + \
        " " + str(sdf_res) + " -s " + " -e " + str(expand_rate) + " -o " + str(indx) + ".dist -m 1"
@@ -213,12 +212,11 @@ def create_sdf_obj(sdfcommand, marching_cube_command, norm_mesh_dir, sdf_dir, ob
        sdf_res, iso_val, expand_rate, indx, ish5, normalize, num_sample, bandwidth, max_verts, g, reduce, h5_file=None):
 
     model_id = os.path.basename(obj).replace('.obj', '')
-
     norm_mesh_sub_dir = os.path.join(norm_mesh_dir, model_id)
     sdf_sub_dir = os.path.join(sdf_dir, model_id)
 
-    if not os.path.exists(norm_mesh_sub_dir): os.makedirs(norm_mesh_sub_dir)
-    if not os.path.exists(sdf_sub_dir): os.makedirs(sdf_sub_dir)
+    os.makedirs(norm_mesh_sub_dir, exist_ok=True)
+    os.makedirs(sdf_sub_dir, exist_ok=True)
     
     sdf_file = os.path.join(sdf_sub_dir, "isosurf.sdf")
 
@@ -354,8 +352,8 @@ def process_obj(obj_file):
     norm_mesh_dir = f'{tmp_dir}/norm_mesh'
     sdf_dir = f'{tmp_dir}/sdf'
 
-    if not os.path.exists(norm_mesh_dir): os.makedirs(norm_mesh_dir)
-    if not os.path.exists(sdf_dir): os.makedirs(sdf_dir)
+    os.makedirs(norm_mesh_dir, exist_ok=True)
+    os.makedirs(sdf_dir, exist_ok=True)
 
     create_sdf_obj(sdfcommand, mcube_cmd, norm_mesh_dir, sdf_dir, obj_file, sdf_res, 
                 iso_val, expand_rate, indx, ish5, norm, num_sample, bandwidth, max_verts, g, reduce, h5_file)
@@ -385,8 +383,6 @@ if __name__ == "__main__":
     obj_file = '../demo_data/chair_model.obj'
 
     process_obj(obj_file)
-
-    import pdb; pdb.set_trace()
 
     sdfcommand = './isosurface/computeDistanceField'
     mcube_cmd = './isosurface/computeMarchingCubes'

@@ -1,7 +1,7 @@
 import h5py
 import trimesh
 import numpy as np
-import marching_cubes as mcubes
+import mcubes
 import einops
 from einops import rearrange, repeat
 from skimage import measure
@@ -47,9 +47,9 @@ from pytorch3d.transforms import RotateAxisAngle
 from pytorch3d.structures import Meshes
 
 # macros
-from chamferdist import ChamferDistance
+# from chamferdist import ChamferDistance
 
-chamferDist = ChamferDistance()
+# chamferDist = ChamferDistance()
 
 def init_points_renderer(image_size=256, dist=1.7, elev=20, azim=20, camera='0', device='cuda:0'):
     # renderer

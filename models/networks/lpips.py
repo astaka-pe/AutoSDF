@@ -6,7 +6,7 @@ from torchvision import models
 from collections import namedtuple
 
 from utils.lpips_util import get_ckpt_path
-from configs.paths import dataroot
+#from configs.paths import dataroot
 
 class LPIPS(nn.Module):
     # Learned perceptual metric
@@ -20,20 +20,20 @@ class LPIPS(nn.Module):
         self.lin2 = NetLinLayer(self.chns[2], use_dropout=use_dropout)
         self.lin3 = NetLinLayer(self.chns[3], use_dropout=use_dropout)
         self.lin4 = NetLinLayer(self.chns[4], use_dropout=use_dropout)
-        self.load_from_pretrained()
+        #self.load_from_pretrained()
         for param in self.parameters():
             param.requires_grad = False
 
-    def load_from_pretrained(self, name="vgg_lpips"):
-        # ckpt = get_ckpt_path(name, "taming/modules/autoencoder/lpips")
-        coderoot = dataroot[:-4]
-        ckpt = get_ckpt_path(name, '%s/saved_ckpt/lpips' % (coderoot))
-        self.load_state_dict(torch.load(ckpt, map_location=torch.device("cpu")), strict=False)
-        print("loaded pretrained LPIPS loss from {}".format(ckpt))
+    # def load_from_pretrained(self, name="vgg_lpips"):
+    #     # ckpt = get_ckpt_path(name, "taming/modules/autoencoder/lpips")
+    #     coderoot = dataroot[:-4]
+    #     ckpt = get_ckpt_path(name, '%s/saved_ckpt/lpips' % (coderoot))
+    #     self.load_state_dict(torch.load(ckpt, map_location=torch.device("cpu")), strict=False)
+    #     print("loaded pretrained LPIPS loss from {}".format(ckpt))
 
     @classmethod
     def from_pretrained(cls, name="vgg_lpips"):
-        if name is not "vgg_lpips":
+        if name != "vgg_lpips":
             raise NotImplementedError
         model = cls()
         ckpt = get_ckpt_path(name)

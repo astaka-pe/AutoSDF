@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 import numpy as np
 import einops
-import marching_cubes as mcubes
+import mcubes
 import omegaconf
 from termcolor import colored
 from einops import rearrange
