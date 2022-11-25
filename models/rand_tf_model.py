@@ -327,9 +327,9 @@ class RandTransformerModel(BaseModel):
 
         self.inference(comp_data, gen_order=gen_order, topk=topk)
 
-        input_mesh = get_shape_comp_input_mesh(comp_data['sdf'], comp_data['sdf_res'])
-        input_mesh = input_mesh.to(self.x_recon_tf)
-
+        # input_mesh = get_shape_comp_input_mesh(comp_data['sdf'], comp_data['sdf_res'])
+        # input_mesh = input_mesh.to(self.x_recon_tf)
+        input_mesh = None
         return input_mesh, self.x_recon_tf
 
     def single_view_recon(self, img_tensor, resnet2vq, bs=1, topk=30, alpha=0.75):

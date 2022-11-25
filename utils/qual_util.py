@@ -12,6 +12,7 @@ import torchvision.utils as vutils
 import torchvision.transforms as transforms
 
 from pytorch3d import structures
+from pytorch3d.io import IO
 
 from .util_3d import sdf_to_mesh, render_mesh, rotate_mesh_360
 
@@ -31,6 +32,8 @@ def make_batch(data, B=16):
 
 def get_partial_shape_by_range(sdf, input_range, thres=0.2):
     sdf = torch.clamp(sdf, min=-thres, max=thres)
+    mesh = sdf_to_mesh(sdf)
+    IO().save_mesh(mesh, "input.obj")
     
     min_x, max_x = input_range['x1'], input_range['x2']
     min_y, max_y = input_range['y1'], input_range['y2']
